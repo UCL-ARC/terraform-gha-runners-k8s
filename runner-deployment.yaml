@@ -1,0 +1,25 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: runner-deployment
+  namespace: runners
+spec:
+  template:
+    spec:
+      repository: bathomas/gha-test
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: runner-deployment-autoscaler
+  namespace: runners
+spec:
+  scaleTargetRef:
+    kind: RunnerDeployment
+    name: runner-deployment
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
+  - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
+    repositoryNames:
+    - bathomas/gha-test
