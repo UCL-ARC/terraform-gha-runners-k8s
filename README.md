@@ -4,7 +4,7 @@
 
 - Ephemeral, auto-scaling GitHub Actions runners on Kubernetes.
 - Installs [actions-runner-controller](https://github.com/actions/actions-runner-controller)
-on Kubernetes via Terraform.
+  on Kubernetes via Terraform.
 
 ## Setting up a dev k3s instance with libvirt/KVM
 
