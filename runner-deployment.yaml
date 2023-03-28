@@ -6,7 +6,7 @@ metadata:
 spec:
   template:
     spec:
-      repository: bathomas/gha-test
+      repository: UCL-ARC/gha-test
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
@@ -22,4 +22,4 @@ spec:
   metrics:
   - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
     repositoryNames:
-    - bathomas/gha-test
+    - UCL-ARC/gha-test
