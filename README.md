@@ -3,7 +3,6 @@
 ## WIP
 
 - Ephemeral, auto-scaling GitHub Actions runners on Kubernetes.
-
 - Installs [actions-runner-controller](https://github.com/actions/actions-runner-controller)
 on Kubernetes via Terraform.
 
@@ -23,7 +22,7 @@ sudo usermod -aG kvm $USER
 sudo usermod -aG libvirt $USER
 # Config. network if required
 sudo virsh net-dumpxml default > default.xml
-sudo virsh net-define default.xml 
+sudo virsh net-define default.xml
 sudo virsh net-start default
 sudo virsh net-list
 # Get k3os
@@ -52,7 +51,7 @@ Run as server or agent?
 1. server
 2. agent
 Select Number [1]: 1
-Token or cluster secret (optional): 
+Token or cluster secret (optional):
 
 Configuration
 -------------
@@ -63,7 +62,7 @@ Your disk will be formatted and k3OS will be installed with the above configurat
 Continue? [y/N]: y
 ```
 
-- Copy `/etc/rancher/k3s/k3s.yaml` on the VM to `~/.kube/config` on the host. 
+- Copy `/etc/rancher/k3s/k3s.yaml` on the VM to `~/.kube/config` on the host.
 - Change the localhost IP in the `config` file to match the IP of the VM.
 
 <!-- BEGIN_TF_DOCS -->
