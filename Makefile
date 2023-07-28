@@ -25,3 +25,6 @@ ec2-k3s-destroy:
 
 ec2-k3s-ssh:
 	cd ./ec2-k3s && ./ssh.sh
+
+gha-runners:
+	$(call terraform-apply, ./gha-runners)

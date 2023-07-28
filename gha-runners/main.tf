@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "kubernetes" {
-  config_path = "~/.kube/config"
+  #config_path = "~/.kube/config"
 }
 
 resource "kubernetes_namespace" "cert-manager" {
@@ -45,7 +45,7 @@ resource "kubernetes_secret" "runner-secret" {
   }
 
   data = {
-    github_token = "${var.gh_pat_token}"
+    github_token = var.gh_pat_token
   }
 
   type = "Opaque"

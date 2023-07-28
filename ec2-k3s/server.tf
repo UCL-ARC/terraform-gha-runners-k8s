@@ -26,7 +26,8 @@ resource "aws_instance" "server" {
     inline = [
       "echo 'Waiting for cloud-init to complete...'",
       "cloud-init status --wait > /dev/null",
-      "echo 'Completed cloud-init!'"
+      "echo 'Completed cloud-init!'",
+      "sudo reboot"
     ]
 
     connection {
@@ -46,7 +47,7 @@ resource "aws_instance" "server" {
 resource "null_resource" "save_token" {
   provisioner "local-exec" {
     command = <<EOF
-until ${local.ssh_command} /usr/local/bin/k3s --version; do sleep 10; done
+until ${local.ssh_command} /usr/local/bin/k3s token create; do sleep 10; done
 token=$(${local.ssh_command} sudo /usr/local/bin/k3s token create --ttl 5h)
 echo {\"token\": \"$token\"} > ${path.module}/token.json
 EOF
