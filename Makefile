@@ -28,3 +28,6 @@ ec2-k3s-ssh:
 
 gha-runners:
 	$(call terraform-apply, ./gha-runners)
+
+gha-runners-destroy:
+	$(call terraform-destroy, ./gha-runners)

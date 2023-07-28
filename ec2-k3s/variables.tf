@@ -15,7 +15,7 @@ variable "k3s_version" {
 
 variable "server_instance_type" {
   type    = string
-  default = "t3a.medium"
+  default = "t3a.large"
 }
 
 variable "node_count" {

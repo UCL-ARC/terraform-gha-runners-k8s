@@ -26,8 +26,7 @@ resource "aws_instance" "server" {
     inline = [
       "echo 'Waiting for cloud-init to complete...'",
       "cloud-init status --wait > /dev/null",
-      "echo 'Completed cloud-init!'",
-      "sudo reboot"
+      "echo 'Completed cloud-init!'"
     ]
 
     connection {

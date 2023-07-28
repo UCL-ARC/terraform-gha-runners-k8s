@@ -5,7 +5,8 @@ function tf_output(){
 }
 
 rsync -vPr \
-  --filter=':- .gitignore' \
+  --exclude=".terraform/" \
+  --exclude="*.tfstate.*/" \
   -e "ssh $(tf_output server_ssh_args)" \
   ../ "$(tf_output server_username_and_host):~"
 
