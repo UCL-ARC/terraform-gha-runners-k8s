@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.13"
+  required_version = ">= 1.2.0"
 
   required_providers {
     kubectl = {
@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "kubernetes" {
-  config_path    = "~/.kube/config"
+  config_path = "~/.kube/config"
 }
 
 resource "kubernetes_namespace" "cert-manager" {
@@ -41,7 +41,7 @@ resource "kubernetes_namespace" "runner-ns" {
 resource "kubernetes_secret" "runner-secret" {
   metadata {
     name      = "controller-manager"
-    namespace = "actions-runner-system" 
+    namespace = "actions-runner-system"
   }
 
   data = {
