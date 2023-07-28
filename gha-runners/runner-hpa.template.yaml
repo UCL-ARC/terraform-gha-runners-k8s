@@ -1,18 +1,8 @@
 apiVersion: actions.summerwind.dev/v1alpha1
-kind: RunnerDeployment
-metadata:
-  name: runner-deployment
-  namespace: runners
-spec:
-  template:
-    spec:
-      repository: UCL-ARC/gha-test
----
-apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
 metadata:
   name: runner-deployment-autoscaler
-  namespace: runners
+  namespace: ${namespace}
 spec:
   scaleTargetRef:
     kind: RunnerDeployment
@@ -22,4 +12,4 @@ spec:
   metrics:
   - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
     repositoryNames:
-    - UCL-ARC/gha-test
+    - ${repository}

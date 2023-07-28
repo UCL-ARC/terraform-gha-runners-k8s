@@ -24,6 +24,10 @@ provider "kubernetes" {
   #config_path = "~/.kube/config"
 }
 
+locals {
+  repositories_set = toset(split(",", var.repositories))
+}
+
 resource "kubernetes_namespace" "cert-manager" {
   metadata {
     name = "cert-manager"
@@ -70,10 +74,6 @@ resource "kubernetes_secret" "runner-secret" {
   }
 
   type = "Opaque"
-
-  depends_on = [
-    kubernetes_namespace.runner-ns
-  ]
 }
 
 resource "helm_release" "arc" {
@@ -95,15 +95,22 @@ resource "kubernetes_namespace" "gha-ns" {
   }
 }
 
-#data "kubectl_file_documents" "runner-deploy" {
-#  content = file("./runner-deployment.yaml")
-#}
-#
-#resource "kubectl_manifest" "runner-deploy" {
-#  for_each  = data.kubectl_file_documents.runner-deploy.manifests
-#  yaml_body = each.value
-#
-#  depends_on = [
-#    helm_release.arc
-#  ]
-#}
+resource "kubernetes_manifest" "deployments" {
+  for_each = local.repositories_set
+  manifest = yamldecode(templatefile("${path.module}/runner-deployment.template.yaml",
+    {
+      namespace  = kubernetes_namespace.gha-ns.metadata[0].name
+      repository = each.key
+    }
+  ))
+}
+
+resource "kubernetes_manifest" "auto_scalers" {
+  for_each = local.repositories_set
+  manifest = yamldecode(templatefile("${path.module}/runner-hpa.template.yaml",
+    {
+      namespace  = kubernetes_namespace.gha-ns.metadata[0].name
+      repository = each.key
+    }
+  ))
+}

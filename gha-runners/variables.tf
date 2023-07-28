@@ -3,3 +3,8 @@ variable "gh_pat_token" {
   sensitive   = true
   description = "GitHub PAT code with access to repo(s)/org."
 }
+
+variable "repositories" {
+  type        = string
+  description = "Comma separated list of repositories to create runners for"
+}

@@ -1,0 +1,32 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: runner-deployment
+  namespace: ${namespace}
+spec:
+  template:
+    spec:
+      # Options: https://github.com/actions/actions-runner-controller/blob/dcb64f0b9e889f4751bf257f2a37632ce10a3e10/docs/automatically-scaling-runners.md
+      repository: ${repository}
+      dockerEnabled: false
+      securityContext:
+        seLinuxOptions:
+          level: "s0"
+          role: "system_r"
+          type: "super_t"
+          user: "system_u"
+      resources:
+        limits:
+          cpu: "2"
+          memory: "8Gi"
+        requests:
+          cpu: "1"
+          memory: "4Gi"
+      env:
+        - name: RUNNER_ALLOW_RUNASROOT
+          value: "0"
+        - name: RUNNER_EPHEMERAL
+          value: "true"
+      containers:
+      - name: runner
+        privileged: false
