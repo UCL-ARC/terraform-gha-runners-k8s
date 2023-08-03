@@ -6,3 +6,25 @@
 - Ephemeral, auto-scaling GitHub Actions runners on Kubernetes.
 - Installs [actions-runner-controller](https://github.com/actions/actions-runner-controller)
   on Kubernetes via Terraform.
+
+This repository contains terraform for deploying a [k3s](https://k3s.io/)
+cluster on EC2 instances which can be used to test the [actions-runner-controller
+deployment](./gha-runners). First, create a `.env` file from `.env.sample`
+
+#### Required variables
+- `REPOSITORIES`: A comma seperated list of repositories e.g. `octo-org/octo-repoA,octo-org/octo-repoB`
+Terraform variables (e.g. `TF_VAR_x`) will be prompted for if unset.
+
+Then deploy with:
+
+```bash
+make ec2-k3s        # Deploy the k3s cluster
+make ec2-k3s-ssh    # SSH onto the server instance
+make gha-runners    # Deploy the GitHub runners
+kubectl get pods -A # Check the runner pods are up
+```
+
+## gha-runners
+<!-- BEGIN_TF_DOCS -->
+{{ .Content }}
+<!-- END_TF_DOCS -->
