@@ -1,3 +1,5 @@
+# gha-runners
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -16,10 +18,6 @@
 | <a name="provider_http"></a> [http](#provider\_http) | n/a |
 | <a name="provider_kubectl"></a> [kubectl](#provider\_kubectl) | >= 1.7.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.22.0 |
-
-## Modules
-
-No modules.
 
 ## Resources
 
@@ -43,8 +41,4 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_gh_pat_token"></a> [gh\_pat\_token](#input\_gh\_pat\_token) | GitHub PAT code with access to repo(s)/org. | `string` | n/a | yes |
 | <a name="input_repositories"></a> [repositories](#input\_repositories) | Comma separated list of repositories to create runners for | `string` | n/a | yes |
-
-## Outputs
-
-No outputs.
 <!-- END_TF_DOCS -->
