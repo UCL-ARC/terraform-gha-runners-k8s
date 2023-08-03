@@ -31,8 +31,6 @@ make gha-runners     # Deploy the GitHub runners
 kubectl get pods -A  # Check the runner pods are up
 ```
 
-## gha-runners
-
-<!-- BEGIN_TF_DOCS -->
-{{ .Content }}
-<!-- END_TF_DOCS -->
+## Modules
+### - [ec2-k3s](./gha-runners)
+### - [gha-runners](./gha-runners)

@@ -10,3 +10,10 @@ repos:
     rev: v1.81.0
     hooks:
       - id: terraform_fmt
+
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: "v0.16.0"
+    hooks:
+      - id: terraform-docs-go
+        args: [".", "-c", ".terraform.docs.yml"]
+        pass_filenames: false
