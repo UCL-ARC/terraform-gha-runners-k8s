@@ -1,14 +1,12 @@
 name: Generate terraform docs
 on:
-  - pull_request
+  - push
 
 jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.pull_request.head.ref }}
 
     - name: Render terraform docs and push changes back to PR
       uses: terraform-docs/gh-actions@main
