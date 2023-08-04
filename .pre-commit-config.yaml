@@ -1,0 +1,25 @@
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.81.0
+    hooks:
+      - id: terraform_fmt
+
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: v0.16.0
+    hooks:
+      - id: terraform-docs-go
+        args: [".", "-c", ".terraform.docs.yml"]
+        pass_filenames: false
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.35.0
+    hooks:
+      - id: markdownlint-fix-docker
+        args: ["--disable", "MD013,MD033"]
