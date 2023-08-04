@@ -37,3 +37,6 @@ override.tf.json
 
 # IntelliJ
 .idea
+
+# Created by terraform-docs
+.github/README.md
